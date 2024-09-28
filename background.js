@@ -1,14 +1,12 @@
 //Listen for messages
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
   if (msg.name == "fetchWords") {
-    const apiKey =
-      "00001111222233334444555566667777hhhh8888ggg9999dddd00rrr000ttt";
+    // const apiKey = bqdgv1nwl5yc5dls7jg0oux9elfpxfynw53s4dsqzd125ez20;
     const dateStr = new Date().toISOString().slice(0, 10); //2020-01-01
     const apiCall =
       "https://api.wordnik.com/v4/words.json/wordOfTheDay?date=" +
       dateStr +
-      "&api_key=" +
-      apiKey;
+      "&api_key=bqdgv1nwl5yc5dls7jg0oux9elfpxfynw53s4dsqzd125ez20";
     //We call api..
     fetch(apiCall)
       .then(function (res) {
@@ -20,7 +18,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
           });
           return;
         }
-        res.json().then(function (date) {
+        res.json().then(function (data) {
           //Send response ...
           response({ word: data.word, desc: data.note });
         });
